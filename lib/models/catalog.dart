@@ -1,13 +1,15 @@
-class catalogModel {
-  static List<Item> items = [
+import 'package:flutter/widgets.dart';
+
+class CatalogModel {
+  static final items = [
     Item(
         id: 1,
-        name: "Redmi 9",
-        desc: "India's no.1 phone",
+        name: "iPhone 12 Pro",
+        desc: "Apple iPhone 12th generation",
+        price: 999,
         color: "#33505a",
-        imageUrl:
-            "https://i01.appmifile.com/webfile/globalimg/zhouyuxin/J19-Grey-800.png",
-        price: 9999)
+        image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRISJ6msIu4AU9_M9ZnJVQVFmfuhfyJjEtbUm3ZK11_8IV9TV25-1uM5wHjiFNwKy99w0mR5Hk&usqp=CAc")
   ];
 }
 
@@ -15,35 +17,15 @@ class Item {
   final int id;
   final String name;
   final String desc;
-  final int price;
+  final num price;
   final String color;
-  final String imageUrl;
+  final String image;
 
   Item(
       {required this.id,
       required this.name,
       required this.desc,
+      required this.price,
       required this.color,
-      required this.imageUrl,
-      required this.price});
-
-  factory Item.fromMap(Map<String, dynamic> map, param1) {
-    return Item(
-      id: map["id"],
-      name: map["name"],
-      desc: map["desc"],
-      color: map["color"],
-      imageUrl: map["imageURL"],
-      price: map["price"],
-    );
-  }
-
-  tomap() => {
-        "id": id,
-        "name": name,
-        "desc": desc,
-        "color": color,
-        "imageURL": imageUrl,
-        "price": price,
-      };
+      required this.image});
 }

@@ -1,20 +1,20 @@
-import 'dart:math';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'package:arpanmart/models/catalog.dart';
 import 'package:arpanmart/widgets/drawer.dart';
 import 'package:arpanmart/widgets/ItemWidget.dart';
-import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 
-class home_page extends StatefulWidget {
-  const home_page({Key? key}) : super(key: key);
-
+class HomePage extends StatefulWidget {
   @override
-  State<home_page> createState() => _home_pageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _home_pageState extends State<home_page> {
+class _HomePageState extends State<HomePage> {
+  final int days = 30;
+
+  final String name = "Codepur";
+
   @override
   void initState() {
     super.initState();
@@ -22,28 +22,30 @@ class _home_pageState extends State<home_page> {
   }
 
   loadData() async {
-    var catalogJson = await rootBundle.loadString("assests/file/catalog.json");
-    var decodedData = jsonDecode(catalogJson);
-    var productsData = decodedData["product"];
-
-    setState(() {});
+    final catalogJson =
+        await rootBundle.loadString("assests/file/catalog.json");
+    final decodedData = jsonDecode(catalogJson);
+    var productsData = decodedData["products"];
+    print(productsData);
   }
 
   @override
   Widget build(BuildContext context) {
+    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        "ArpanMart",
-        style: TextStyle(color: Colors.black),
-      )),
-      body: ListView.builder(
-        itemCount: catalogModel.items.length,
-        itemBuilder: (context, index) {
-          return ItemWidget(
-            item: catalogModel.items[index],
-          );
-        },
+        title: Text("Catalog App"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          itemCount: dummyList.length,
+          itemBuilder: (context, index) {
+            return ItemWidget(
+              item: dummyList[index],
+            );
+          },
+        ),
       ),
       drawer: Mydrawer(),
     );
